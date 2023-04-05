@@ -6,6 +6,8 @@ const app = express()
 const cardRoutes = require('./routes/cards')
 
 // middleware
+app.use(express.json())
+
 app.use((req, res, next) => {
     // Выводим в консоль путь запроса и метод запроса
     console.log(req.path, req.method)
@@ -14,9 +16,7 @@ app.use((req, res, next) => {
 })
 
 // routes
-app.get('/', (req, res) => {
-    res.json({ msg: 'Добро пожаловать!' })
-})
+app.use('/api/cards', cardRoutes)
 
 
 
