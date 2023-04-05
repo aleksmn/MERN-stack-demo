@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 
 const app = express()
+const cardRoutes = require('./routes/cards')
 
 // middleware
 app.use((req, res, next) => {
