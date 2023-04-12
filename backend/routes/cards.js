@@ -1,4 +1,5 @@
 const express = require('express')
+const Card = require('../models/cardModel')
 
 
 const router = express.Router()
@@ -15,8 +16,17 @@ router.get('/:id', (req, res) => {
 })
 
 // POST new card
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST new card'})
+router.post('/', async (req, res) => {
+
+    const {title, content} = req.body
+
+    try {
+        const card = await Card.create({title, content})
+        res.status(200).json(card)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+
 })
 
 // DELETE card
