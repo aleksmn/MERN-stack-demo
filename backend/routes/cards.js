@@ -1,33 +1,18 @@
 const express = require('express')
-const Card = require('../models/cardModel')
-
+const { createCard, getCards, getOneCard } = require('../controllers/cardController')
+ 
 
 const router = express.Router()
 
 
 // GET ALL
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all cards'})
-})
+router.get('/', getCards)
 
 // GET one
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET one card'})
-})
+router.get('/:id', getOneCard)
 
 // POST new card
-router.post('/', async (req, res) => {
-
-    const {title, content} = req.body
-
-    try {
-        const card = await Card.create({title, content})
-        res.status(200).json(card)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
-
-})
+router.post('/', createCard)
 
 // DELETE card
 router.delete('/:id', (req, res) => {
