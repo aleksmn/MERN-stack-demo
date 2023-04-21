@@ -1,6 +1,12 @@
 const express = require('express')
-const { createCard, getCards, getOneCard } = require('../controllers/cardController')
- 
+const {
+    createCard,
+    getCards,
+    getOneCard,
+    deleteCard,
+    updateCard
+} = require('../controllers/cardController')
+
 
 const router = express.Router()
 
@@ -15,14 +21,11 @@ router.get('/:id', getOneCard)
 router.post('/', createCard)
 
 // DELETE card
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE card'})
-})
+router.delete('/:id', deleteCard)
+
 
 // UPDATE card
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE card'})
-})
+router.patch('/:id', updateCard)
 
 
 
