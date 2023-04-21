@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 
 // get all cards
 
-const getCards = async(req, res) => {
-    const cards = await Card.find({}).sort({createdAt:-1})
+const getCards = async (req, res) => {
+    const cards = await Card.find({}).sort({ createdAt: -1 })
 
     res.status(200).json(cards)
 
@@ -19,16 +19,16 @@ const getCards = async(req, res) => {
 const getOneCard = async (req, res) => {
 
     const { id } = req.params
-    
+
     // check id is valid
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'Invalid id format'})  
+        return res.status(404).json({ error: 'Invalid id format' })
     }
 
     const card = await Card.findById(id)
 
     if (!card) {
-        return res.status(404).json({error: 'No such card'})
+        return res.status(404).json({ error: 'No such card' })
     }
 
     res.status(200).json(card)
@@ -41,13 +41,13 @@ const getOneCard = async (req, res) => {
 
 const createCard = async (req, res) => {
 
-    const {title, content} = req.body
+    const { title, content } = req.body
 
     try {
-        const card = await Card.create({title, content})
+        const card = await Card.create({ title, content })
         res.status(200).json(card)
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(400).json({ error: error.message })
     }
 
 }
@@ -55,6 +55,12 @@ const createCard = async (req, res) => {
 
 
 // delete card
+
+const deleteCard = async (req, res) => {
+    const { id } = req.params
+
+
+}
 
 
 
