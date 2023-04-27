@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useCardsContext } from '../hooks/useCardsContext'
+
 
 const CardForm = () => {
+    const { dispatch } = useCardsContext()
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [error, setError] = useState(null)
@@ -28,6 +31,8 @@ const CardForm = () => {
             setContent('')
 
             console.log('new card added:', json)
+
+            dispatch({type: 'CREATE_CARD', payload: json})
         }
 
     }

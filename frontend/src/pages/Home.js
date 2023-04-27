@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
+import { useCardsContext } from '../hooks/useCardsContext'
 
 
 import CardDetails from "../components/CardDetails"
 import CardForm from '../components/CardForm'
 
 const Home = () => {
-    const [cards, setCards] = useState(null)
+    // const [cards, setCards] = useState(null)
+
+    const {cards, dispatch} = useCardsContext()
 
     useEffect(() => {
         const fetchCards = async () => {
@@ -13,7 +16,9 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                setCards(json)
+                // setCards(json)
+
+                dispatch({type: 'SET_CARDS', payload: json})
             }
         }
 
