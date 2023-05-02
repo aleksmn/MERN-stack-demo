@@ -23,7 +23,7 @@ const Home = () => {
         }
 
         fetchCards()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="container">
