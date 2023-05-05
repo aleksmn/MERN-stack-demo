@@ -26,7 +26,7 @@ const Home = () => {
     }, [dispatch])
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <div className='row gx-5'>
                 <div className="cards col-md-8">
                     {cards && cards.map((card) => (

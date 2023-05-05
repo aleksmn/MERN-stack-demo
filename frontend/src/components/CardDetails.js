@@ -1,5 +1,10 @@
 import { useCardsContext } from '../hooks/useCardsContext';
 
+// Format Date
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import ruLocale from 'date-fns/locale/ru';
+
+
 const CardDetails = ({ card }) => {
 
     const { dispatch } = useCardsContext()
@@ -21,7 +26,8 @@ const CardDetails = ({ card }) => {
         <div className="card-details">
             <h5>{card.title}</h5>
             <p>{card.content}</p>
-            <span onClick={handleClick} style={{"color":"red"}}>Удалить</span>
+            <p>{formatDistanceToNow(new Date(card.createdAt), { addSuffix: true, locale: ruLocale } )}</p>
+            <span onClick={handleClick} className='text-danger material-symbols-outlined'>delete</span>
 
             <hr />
         </div>

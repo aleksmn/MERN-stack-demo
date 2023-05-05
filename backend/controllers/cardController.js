@@ -43,6 +43,21 @@ const createCard = async (req, res) => {
 
     const { title, content } = req.body
 
+    let emptyFields = []
+
+    if(!title) {
+        emptyFields.push('title')
+    }
+
+    if(!content) {
+        emptyFields.push('content')
+    }
+
+    if(emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Пожалуйста, заполните все поля!', emptyFields})
+    }
+
+
     try {
         const card = await Card.create({ title, content })
         res.status(200).json(card)

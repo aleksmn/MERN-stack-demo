@@ -7,6 +7,7 @@ const CardForm = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -24,11 +25,14 @@ const CardForm = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
+
         }
         if (response.ok) {
             setError(null)
             setTitle('')
             setContent('')
+            setEmptyFields([])
 
             console.log('new card added:', json)
 
@@ -43,7 +47,7 @@ const CardForm = () => {
 
             <label className="form-label">Название:</label>
             <input
-                className="form-control  mb-3"
+                className={emptyFields.includes('title') ? 'error form-control  mb-3' : 'form-control  mb-3'}
                 type="text"
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
@@ -51,7 +55,7 @@ const CardForm = () => {
 
             <label className="form-label">Содержимое:</label>
             <textarea
-                className="form-control  mb-3"
+                className={emptyFields.includes('content') ? 'error form-control  mb-3' : 'form-control  mb-3'}
                 type="text"
                 onChange={(e) => setContent(e.target.value)}
                 value={content}
